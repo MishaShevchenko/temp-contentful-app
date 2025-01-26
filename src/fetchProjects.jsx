@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { createClient } from 'contentful';
+import { useState, useEffect } from "react";
+import { createClient } from "contentful";
 
 const client = createClient({
   space: "zoetf6i8ls87",
@@ -13,18 +13,25 @@ export const useFetchProjects = () => {
 
   const getData = async () => {
     try {
-      const response = await client.getEntries({ content_type: 'projects' });
+      const response = await client.getEntries({ content_type: "projects" });
       const projects = response.items.map((item) => {
-        const { title, url, image } = item.fields;
+        const {
+          title = "Untitled Project",
+          url = "#",
+          image,
+          description = "No description available",
+          technologies = [],
+          githubUrl = "#", // Added GitHub URL field with a default fallback
+        } = item.fields;
         const id = item.sys.id;
-        const img = image?.fields?.file?.url;
-        
-        return { title, url, id, img };
+        const img = image?.fields?.file?.url || "default-image.jpg"; // Use a placeholder image if none is provided
+
+        return { id, title, url, img, description, technologies, githubUrl }; // Added githubUrl to the returned object
       });
       setProjects(projects);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.log("Error fetching projects:", error);
       setLoading(false);
     }
   };
@@ -32,5 +39,6 @@ export const useFetchProjects = () => {
   useEffect(() => {
     getData();
   }, []);
+
   return { loading, projects };
 };

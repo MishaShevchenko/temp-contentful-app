@@ -1,4 +1,5 @@
 const projects = [
+  
   {
     title: 'birthday buddy',
     url: 'https://react-vite-projects-1-birthday-buddy.netlify.app/',
