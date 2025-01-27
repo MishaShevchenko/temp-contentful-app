@@ -7,25 +7,24 @@ const ProjectDetail = () => {
   const { id } = useParams();
   const { loading, projects } = useFetchProjects();
 
-  // Show a loading state while projects are being fetched
+  // Loading state
   if (loading) {
     return (
-      <section className="py-10">
-        <h2 className="text-center text-2xl font-bold text-gray-800">
+      <section className="flex items-center justify-center min-h-screen bg-gray-100">
+        <h2 className="text-2xl font-semibold text-gray-800">
           Loading project details...
         </h2>
       </section>
     );
   }
 
-  // Find the project based on the ID from the URL
+  // Check if project exists
   const project = projects.find((proj) => proj.id === id);
 
-  // If the project is not found, display an error message
   if (!project) {
     return (
-      <section className="py-10">
-        <h2 className="text-center text-2xl font-bold text-red-500">
+      <section className="flex items-center justify-center min-h-screen bg-gray-100">
+        <h2 className="text-2xl font-semibold text-red-500">
           Project not found!
         </h2>
       </section>
@@ -35,40 +34,48 @@ const ProjectDetail = () => {
   const { title, description, technologies, img, url, githubUrl } = project;
 
   return (
-    <section className="py-10 px-4">
-      <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+    <section className="min-h-screen bg-gray-50 py-16 px-4">
+      <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
         {/* Image */}
-        <img src={img} alt={title} className="w-full h-64 object-cover" />
+        <img
+          src={img}
+          alt={title}
+          className="w-full h-64 object-cover sm:h-80"
+        />
 
         {/* Content */}
-        <div className="p-6">
-          <h2 className="text-3xl font-bold text-gray-800">{title}</h2>
+        <div className="p-6 sm:p-10">
+          {/* Title */}
+          <h1 className="text-3xl font-bold text-gray-800 mb-6">{title}</h1>
 
-          {/* Render Rich Text Description */}
-          <div className="text-gray-700 mt-4">
+          {/* Description */}
+          <div className="text-gray-700 text-lg leading-relaxed space-y-4">
             {typeof description === "object"
               ? documentToReactComponents(description)
               : description}
           </div>
 
-          <h3 className="text-xl font-semibold text-gray-800 mt-6">
-            Technologies Used:
-          </h3>
-          <p className="text-gray-700 mt-2">
-            {technologies || "No technologies listed."}
-          </p>
+          {/* Technologies */}
+          {technologies && (
+            <div className="mt-8">
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                Technologies Used:
+              </h3>
+              <p className="text-gray-700">{technologies}</p>
+            </div>
+          )}
 
-          {/* GitHub Link with Description */}
+          {/* GitHub Link */}
           {githubUrl && (
-            <div className="mt-6">
-              <h3 className="text-xl font-semibold text-gray-800">
+            <div className="mt-8">
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
                 GitHub Repository:
               </h3>
               <a
                 href={githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="text-blue-500 underline hover:text-blue-700"
+                className="text-blue-500 underline hover:text-blue-600"
               >
                 {githubUrl}
               </a>
@@ -76,16 +83,18 @@ const ProjectDetail = () => {
           )}
 
           {/* Live Project Link */}
-          <div className="mt-6">
-            <a
-              href={url}
-              target="_blank"
-              rel="noreferrer"
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-            >
-              View Live Project
-            </a>
-          </div>
+          {url && (
+            <div className="mt-10">
+              <a
+                href={url}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-600 transition duration-300"
+              >
+                View Live Project
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </section>
