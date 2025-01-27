@@ -1,10 +1,11 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useFetchProjects } from "./fetchProjects";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 const ProjectDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate(); // To navigate back
   const { loading, projects } = useFetchProjects();
 
   if (loading) {
@@ -29,6 +30,11 @@ const ProjectDetail = () => {
 
   return (
     <section className="project-detail">
+      {/* Back Button */}
+      <button className="back-button" onClick={() => navigate(-1)}>
+        ← Back to Projects
+      </button>
+
       {/* Image */}
       <div className="project-img-container">
         <img src={img} alt={title} className="project-img" />
