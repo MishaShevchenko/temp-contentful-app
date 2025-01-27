@@ -8,9 +8,16 @@ const App = () => {
   return (
     <BrowserRouter future={{ v7_startTransition: true }}>
       <main>
-        <Hero />
         <Routes>
-          <Route path="/" element={<Projects />} />
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero />
+                <Projects />
+              </>
+            }
+          />
           <Route path="/project/:id" element={<ProjectDetail />} />
         </Routes>
       </main>
