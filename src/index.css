@@ -370,3 +370,138 @@ PROJECTS
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
+
+.projects,
+.project-detail {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.project-img-container {
+  max-height: 500px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.project-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.project-content {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.project-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.project-description {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.project-technologies {
+  margin-top: 1.5rem;
+}
+
+.project-link {
+  margin-top: 1.5rem;
+}
+
+.project-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.project-link a:hover {
+  text-decoration: underline;
+}
+
+.project-button {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.project-button:hover {
+  background-color: #0056b3;
+}
+
+.project-detail {
+  line-height: 1.8; /* Improved readability for all text in the ProjectDetail section */
+  margin-bottom: 1.5rem; /* Consistent spacing below sections */
+}
+
+.project-description {
+  line-height: 1.8; /* Enhanced readability for the project description text */
+  margin-bottom: 2rem; /* Maintain spacing consistency after descriptions */
+}
+
+.project-technologies {
+  line-height: 1.7; /* Improved spacing for lists or grouped text in technologies section */
+}
+
+.project-link {
+  line-height: 1.6; /* Ensure good spacing for links */
+}
+
+.project-link a {
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .project-detail {
+    padding: 1rem;
+    max-width: 100%;
+  }
+
+  .project-img-container {
+    max-height: 300px; 
+    overflow: hidden;
+    border-radius: var(--borderRadius);
+  }
+
+  .project-img {
+    object-fit: cover;
+    height: auto; 
+    max-width: 100%;
+  }
+
+  .project-title {
+    font-size: 1.5rem; 
+    margin-bottom: 1rem;
+  }
+
+  .project-description {
+    font-size: 1rem;
+    line-height: 1.6; 
+    margin-bottom: 1.5rem;
+  }
+
+  .project-technologies {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .project-link a {
+    font-size: 0.9rem; 
+  }
+
+  .project-button {
+    padding: 0.5rem 1rem; 
+    font-size: 0.9rem;
+  }
+}

@@ -21,17 +21,22 @@ export const useFetchProjects = () => {
           image,
           description = "No description available",
           technologies = [],
-          githubUrl = "#", // Added GitHub URL field with a default fallback
+          githubUrl = "#", // Added GitHub URL with default fallback
         } = item.fields;
-        const id = item.sys.id;
-        const img = image?.fields?.file?.url || "default-image.jpg"; // Use a placeholder image if none is provided
 
-        return { id, title, url, img, description, technologies, githubUrl }; // Added githubUrl to the returned object
+        const id = item.sys.id;
+
+        // Add `https:` to the image URL
+        const img = image?.fields?.file?.url
+          ? `https:${image.fields.file.url}` // Ensure the URL is complete
+          : "https://via.placeholder.com/800x400?text=No+Image"; // Placeholder for missing images
+
+        return { id, title, url, img, description, technologies, githubUrl };
       });
       setProjects(projects);
       setLoading(false);
     } catch (error) {
-      console.log("Error fetching projects:", error);
+      console.error("Error fetching projects:", error);
       setLoading(false);
     }
   };
